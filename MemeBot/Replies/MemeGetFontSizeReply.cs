@@ -25,9 +25,9 @@ namespace MemeBot.Replies
             ChatStates.SetFontSize(chatId, f);
 
             //request vertical aligment
-            await client.SendTextMessageAsync(chatId, $"Send me vertical aligment (up/middle/down)!");
+            await client.SendTextMessageAsync(chatId, $"Send me font!\nChoose from these:\nArial\nImpact\nCalibri\nCambria\nTimes New Roman");
 
-            return new MemeGetVerticalAligmentReply();
+            return new MemeGetFontReply();
         }
     }
 }

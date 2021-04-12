@@ -13,7 +13,8 @@ namespace MemeBot.Replies
             Console.WriteLine($"Received \"{message.Text}\" vertical aligment in {chatId} chat from @{message.Chat.Username}");
 
             //check if vertical aligment parameter is valid
-            if (Array.FindIndex(Caption.verticalAligmentTypes, type => type.Equals(message.Text)) < 0)
+            var toLower = message.Text.ToLower();
+            if (Array.FindIndex(Caption.verticalAligmentTypes, type => type.Equals(toLower)) < 0)
             {
                 WrongReplyParameters(message, client);
                 return null;
@@ -21,11 +22,10 @@ namespace MemeBot.Replies
 
             ChatStates.SetVerticalAligment(chatId, message.Text);
 
-            //send new image
-            var imageStream = ChatStates.GetMeme(chatId);
-            await client.SendPhotoAsync(chatId, imageStream, "Here is your meme!");
+            //request answer
+            await client.SendTextMessageAsync(chatId, $"Do you want to add more captions?\nYes\nNo");
 
-            return null;
+            return new MemeGetAnotherCaptionReply();
         }
     }
 }

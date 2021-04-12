@@ -13,12 +13,6 @@ namespace MemeBot
 
         public Meme() { }
 
-        public Meme(Bitmap bitmap, List<Caption> captions)
-        {
-            this.bitmap = bitmap;
-            this.captions = captions;
-        }
-
         public bool Ready()
         {
             return bitmap != null && captions.TrueForAll(caption => caption.Ready());
