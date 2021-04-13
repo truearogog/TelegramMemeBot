@@ -51,24 +51,24 @@ namespace MemeBot
             chatStates[chatId].meme.bitmap = bitmap;
         }
 
-        public static void SetCaption(long chatId, string caption)
+        public static void SetCaptionText(long chatId, string captionText)
         {
-            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].text = caption;
+            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].Text = captionText;
         }
 
         public static void SetFontSize(long chatId, float size)
         {
-            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].size = size;
+            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].FontSize = size;
         }
 
-        public static void SetFont(long chatId, string font)
+        public static void SetFontFamily(long chatId, string font)
         {
-            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].font = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(font.ToLower());
+            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].FontFamily = font;
         }
 
         public static void SetVerticalAligment(long chatId, string verticalAligment)
         {
-            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].verticalAligment = verticalAligment;
+            chatStates[chatId].meme.captions[chatStates[chatId].meme.captions.Count - 1].VerticalAligment = verticalAligment;
         }
 
         public static void AddCaption(long chatId)

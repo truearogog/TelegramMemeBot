@@ -49,7 +49,7 @@ namespace MemeBot.Replies
             //request caption
             await client.SendTextMessageAsync(chatId, $"Send me a caption!");
 
-            return new MemeGetCaptionReply();
+            return new MemeGetCaptionTextReply();
         }
     }
 }

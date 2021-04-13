@@ -5,15 +5,17 @@ using Telegram.Bot.Types;
 
 namespace MemeBot.Replies
 {
-    class MemeGetCaptionReply : Reply
+    class MemeGetCaptionTextReply : Reply
     {
         public override async Task<Reply> Execute(Message message, TelegramBotClient client)
         {
             var chatId = message.Chat.Id;
-            Console.WriteLine($"Received \"{message.Text}\" caption in {chatId} chat from @{message.Chat.Username}");
+            var text = message.Text.Trim();
+
+            Console.WriteLine($"Received \"{text}\" caption in {chatId} chat from @{message.Chat.Username}");
 
             //set meme caption
-            ChatStates.SetCaption(chatId, message.Text);
+            ChatStates.SetCaptionText(chatId, text);
 
             //request font size
             await client.SendTextMessageAsync(chatId, $"Send me font size (from 0.0 to 1.0)!");

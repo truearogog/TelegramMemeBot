@@ -1,33 +1,50 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace MemeBot
 {
     class Caption
     {
-        public string text { get; set; }
-        public string verticalAligment { get; set; }
-        public static string[] verticalAligmentTypes = { "up", "down", "middle" };
-        public float size { get; set; }
-        public string font { get; set; } = "impact";
-        public static string[] availableFonts = { "arial", "impact", "calibri", "cambria", "times new roman" };
+        public string Text { get { return m_text; } set { m_text = value; } }
+        private string m_text = "text";
+        public string VerticalAligment { get { return m_verticalAligment; } set { m_verticalAligment = value.ToLower(); } }
+        private string m_verticalAligment = "Down";
+        public static string[] verticalAligments = { "Up", "Down", "Middle" };
+        public float FontSize { get { return m_fontSize; } set { m_fontSize = value; } }
+        private float m_fontSize = 1.0f;
+        public string FontFamily { get { return m_fontFamily; } set { m_fontFamily = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower()); } }
+        private string m_fontFamily = "Impact";
+        public static string[] fontFamilies = { "Arial", "Impact", "Calibri", "Cambria", "Times New Roman" };
 
         public Caption() { }
 
+        public static bool ContainsVerticalAligment(string verticalAligment)
+        {
+            verticalAligment = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(verticalAligment.ToLower());
+            return Array.FindIndex(verticalAligments, aligment => aligment.Equals(verticalAligment)) >= 0;
+        }
+
+        public static bool ContainsFontFamily(string fontFamily)
+        {
+            fontFamily = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(fontFamily.ToLower());
+            return Array.FindIndex(fontFamilies, family => family.Equals(fontFamily)) >= 0;
+        }
+
         public bool Ready()
         {
-            return text != null && verticalAligment != null && font != null && size >= 0;
+            return Text != null && VerticalAligment != null && FontFamily != null && FontSize >= 0;
         }
 
         public void Draw(Bitmap image, GraphicsPath path)
         {
-            float fontSize = image.Width / text.Length * 2 * this.size;
+            float fontSize = image.Width / Text.Length * 2 * FontSize;
 
-            path.AddString(text, new FontFamily(font), 0, fontSize, new PointF(0, 0), StringFormat.GenericDefault);
+            path.AddString(Text, new FontFamily(FontFamily), 0, fontSize, new PointF(0, 0), StringFormat.GenericDefault);
 
             float offsetX = image.Width / 2 - path.GetBounds().Width / 2;
             float offsetY;
-            switch (verticalAligment)
+            switch (VerticalAligment)
             {
                 case "up":
                     offsetY = 5;
@@ -49,7 +66,7 @@ namespace MemeBot
 
         public override string ToString()
         {
-            return $"{verticalAligment} {size} {text}";
+            return $"{VerticalAligment} {FontSize} {FontFamily} {Text}";
         }
     }
 }

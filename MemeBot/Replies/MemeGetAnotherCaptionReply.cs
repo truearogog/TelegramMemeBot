@@ -10,9 +10,12 @@ namespace MemeBot.Replies
         public override async Task<Reply> Execute(Message message, TelegramBotClient client)
         {
             var chatId = message.Chat.Id;
-            Console.WriteLine($"Received \"{message.Text}\" answer in {chatId} chat from @{message.Chat.Username}");
+            var text = message.Text.Trim();
 
-            if (message.Text.ToLower() == "yes")
+            Console.WriteLine($"Received \"{text}\" answer in {chatId} chat from @{message.Chat.Username}");
+
+            var toLower = text.ToLower();
+            if (toLower == "yes")
             {
                 //add another caption
                 ChatStates.AddCaption(chatId);
@@ -20,7 +23,7 @@ namespace MemeBot.Replies
                 //request caption
                 await client.SendTextMessageAsync(chatId, $"Send me a caption!");
 
-                return new MemeGetCaptionReply();
+                return new MemeGetCaptionTextReply();
             }
 
             //send meme image

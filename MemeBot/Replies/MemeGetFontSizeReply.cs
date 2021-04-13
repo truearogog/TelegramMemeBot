@@ -7,15 +7,16 @@ namespace MemeBot.Replies
 {
     class MemeGetFontSizeReply : Reply
     {
-
         public override async Task<Reply> Execute(Message message, TelegramBotClient client)
         {
             var chatId = message.Chat.Id;
-            Console.WriteLine($"Received \"{message.Text}\" font size in {chatId} chat from @{message.Chat.Username}");
+            var text = message.Text.Trim();
+
+            Console.WriteLine($"Received \"{text}\" font size in {chatId} chat from @{message.Chat.Username}");
 
             //check if font size parameter is valid
             float f;
-            if (!float.TryParse(message.Text, out f))
+            if (!float.TryParse(text, out f))
             {
                 WrongReplyParameters(message, client);
                 return null;
@@ -25,9 +26,9 @@ namespace MemeBot.Replies
             ChatStates.SetFontSize(chatId, f);
 
             //request vertical aligment
-            await client.SendTextMessageAsync(chatId, $"Send me font!\nChoose from these:\nArial\nImpact\nCalibri\nCambria\nTimes New Roman");
+            await client.SendTextMessageAsync(chatId, $"Send me font!\nChoose from these:\n{ string.Join("\n", Caption.fontFamilies) }");
 
-            return new MemeGetFontReply();
+            return new MemeGetFontFamilyReply();
         }
     }
 }
