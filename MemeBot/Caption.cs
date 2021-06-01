@@ -38,7 +38,14 @@ namespace MemeBot
 
         public void Draw(Bitmap image, GraphicsPath path)
         {
-            float fontSize = image.Width / Text.Length * 2 * FontSize;
+            if (FontSize == 0 || FontSize > 1.0)
+                return;
+
+            var lines = Text.Split('\n');
+            int maxLen = 0;
+            Array.ForEach(lines, line => maxLen = Math.Max(line.Length, maxLen));
+
+            float fontSize = image.Width / maxLen * 2 * FontSize;
 
             path.AddString(Text, new FontFamily(FontFamily), 0, fontSize, new PointF(0, 0), StringFormat.GenericDefault);
 
@@ -53,7 +60,7 @@ namespace MemeBot
                     offsetY = image.Height / 2 - path.GetBounds().Height / 2;
                     break;
                 case "down":
-                    offsetY = image.Height - fontSize - 2;
+                    offsetY = image.Height - fontSize * lines.Length - 2;
                     break;
                 default:
                     offsetY = 5;

@@ -12,7 +12,7 @@ namespace MemeBot.Replies
             var chatId = message.Chat.Id;
             var text = message.Text.Trim();
 
-            Console.WriteLine($"Received \"{text}\" font size in {chatId} chat from @{message.Chat.Username}");
+            Debug.WriteReceived(message);
 
             //check if font size parameter is valid
             float f;

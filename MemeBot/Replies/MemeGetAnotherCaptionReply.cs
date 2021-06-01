@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -12,7 +11,7 @@ namespace MemeBot.Replies
             var chatId = message.Chat.Id;
             var text = message.Text.Trim();
 
-            Console.WriteLine($"Received \"{text}\" answer in {chatId} chat from @{message.Chat.Username}");
+            Debug.WriteReceived(message);
 
             var toLower = text.ToLower();
             if (toLower == "yes")

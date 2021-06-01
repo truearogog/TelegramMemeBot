@@ -13,7 +13,7 @@ namespace MemeBot.Replies
             var chatId = message.Chat.Id;
             var text = message.Text.Trim();
 
-            Console.WriteLine($"Received \"{text}\" font family in {chatId} chat from @{message.Chat.Username}");
+            Debug.WriteReceived(message);
 
             //check if font family parameter is valid
             if (!Caption.ContainsFontFamily(text))

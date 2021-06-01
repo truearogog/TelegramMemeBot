@@ -12,7 +12,7 @@ namespace MemeBot.Replies
             var chatId = message.Chat.Id;
             var text = message.Text.Trim();
 
-            Console.WriteLine($"Received \"{text}\" caption in {chatId} chat from @{message.Chat.Username}");
+            Debug.WriteReceived(message);
 
             //set meme caption
             ChatStates.SetCaptionText(chatId, text);

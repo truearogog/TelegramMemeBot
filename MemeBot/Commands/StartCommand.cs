@@ -13,6 +13,8 @@ namespace MemeBot.Commands
         {
             var chatId = message.Chat.Id;
 
+            Debug.WriteReceived(message);
+
             await client.SendTextMessageAsync(chatId, "Just write /meme and create your own meme!");
 
             return null;

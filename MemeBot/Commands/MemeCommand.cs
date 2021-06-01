@@ -1,5 +1,4 @@
-﻿using System;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using MemeBot.Replies;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace MemeBot.Commands
         {
             var chatId = message.Chat.Id;
 
-            Console.WriteLine($"Received \"{message.Text}\" in {chatId} chat from @{message.Chat.Username}");
+            Debug.WriteReceived(message);
 
             //request meme image
             await client.SendTextMessageAsync(chatId, "Send me meme image!");

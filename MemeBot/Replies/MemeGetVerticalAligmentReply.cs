@@ -12,7 +12,7 @@ namespace MemeBot.Replies
             var chatId = message.Chat.Id;
             var text = message.Text.Trim();
 
-            Console.WriteLine($"Received \"{text}\" vertical aligment in {chatId} chat from @{message.Chat.Username}");
+            Debug.WriteReceived(message);
 
             //check if vertical aligment parameter is valid
             if (!Caption.ContainsVerticalAligment(text))

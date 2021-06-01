@@ -40,7 +40,7 @@ namespace MemeBot.Replies
                 bitmap = new Bitmap(resizedBitmap);
             }
 
-            Console.WriteLine($"Received {file.FileSize / 1024} KB {bitmap.Width}x{bitmap.Height} image in {chatId} chat from @{message.Chat.Username}");
+            Debug.WriteReceived(message, $"{file.FileSize / 1024} KB {bitmap.Width}x{bitmap.Height} image");
 
             //add chat and set meme image
             ChatStates.AddChat(chatId);
